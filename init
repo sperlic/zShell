@@ -1,0 +1,28 @@
+## --- system/init
+## Initializes zShell environment
+## Modified: Sat 08 Jan 2011 03:31:44 AM CET
+
+## Load all framework lib files 
+for config ({$ZSH_DIR,$ZSH_SYS}/lib/*.zsh) source $config
+
+## Load all of the plugins that were defined in ~/.zshrc
+plugin=${plugin:=()}
+for plugin ($plugins) 
+    if [ -f $ZSH_DIR/plugins/$plugin/$plugin.plugin.zsh ]; then
+        source $ZSH_DIR/plugins/$plugin/$plugin.plugin.zsh
+    elif [ -f $ZSH_SYS/plugins/$plugin/$plugin.plugin.zsh ]; then
+        source $ZSH_SYS/plugins/$plugin/$plugin.plugin.zsh
+    else
+        echo "Plugin >> $plugin << does not exist. Please, check your ~/.zshrc file."
+        sleep 5
+        exit
+    fi
+
+## Check for updates on initial load...
+if [ "$DISABLE_AUTO_UPDATE" = "true" ]; then
+  return
+else
+  /usr/bin/env zsh $ZSH_SYS/tools/check_for_update.sh
+fi
+
+## vim:ft=zsh

@@ -1,0 +1,39 @@
+## --- themes/prompt_zshell_setup
+## modified: Wed 12 Jan 2011 11:35:02 PM CET
+
+prompt_zshell_help () {
+cat <<'EOF'
+Default zShell theme writen by z10n <ivan@sperlic.rs>
+EOF
+}
+
+prompt_zshell_setup () {
+    setopt noxtrace localoptions
+    add-zsh-hook precmd prompt_zshell_precmd
+
+    prompt_zshell_precmd () {
+        local prompt_user="%F{cyan}%n%f"                  # normal user
+        local prompt_root="%F{red}%n%f"                   # root user
+        local prompt_sepr="%F{yellow%}@%f"                # @ separator
+        local prompt_host="%F{green}%M%f"                 # hostname
+        local prompt_path="%F{yellow}%~%f"                # current path
+        local prompt_time="%F{magenta}%T%f"               # current time
+        local prompt_history_count="%F{yellow}%!%f"       # number of lines in history file ~/.zsh_history
+
+        if [[ $USER = "root" ]]; then
+            local prompt_login=$prompt_root
+        else
+            local prompt_login=$prompt_user
+        fi
+
+        ## Setup {R,S,}PROMPT
+        PROMPT="$prompt_login$prompt_sepr$prompt_host ($prompt_path) $(vcs_prompt)%% "
+        RPROMPT="$(battery_status) $(zrev)$prompt_time $prompt_history_count "
+        SPROMPT='Change '\''%R'\'' in '\''%r'\'' [Nyae]? '
+    }
+}
+
+prompt_zshell_setup "$@"
+
+## vim:ft=zsh
+

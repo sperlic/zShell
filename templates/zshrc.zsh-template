@@ -1,0 +1,38 @@
+## --- ~/.zshrc
+
+## zShell paths 
+export ZSH_DIR=$HOME/.zsh
+export ZSH_SYS=$ZSH_DIR/system
+
+## Set to the name theme to load.
+## Look in ~/.zsh/themes/
+export ZSH_THEME="zshell"
+
+## Set to this to use case-sensitive completion
+export CASE_SENSITIVE="true"
+
+## Comment this out to disable weekly auto-update checks
+## export DISABLE_AUTO_UPDATE="true"
+
+## Uncomment following line if you want to disable colors in ls
+## export DISABLE_LS_COLORS="true"
+
+## To enable plugins uncomment 'plugins=()' line and enter plugins 
+## separated by space. Example: plugins=(dirpersist)
+## Available plugins => $ZSH_SYS/plugins: 
+##  - dirpersist / Make the dirstack more persistant.
+## plugins=()
+
+## Native ZSH VCS support  
+## http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#SEC273
+## To enable VCS support, uncomment 'vcs_backends=()' line and enter 
+## backends separated by space. Example: vcs_backends=(git svn darcs)
+## List of supported version control backends:
+## bzr, cdv, cvs, darcs, git, hg, mtn, p4, svk, svn, tla
+## vcs_backends=()
+
+## Initialize shell. 
+source $ZSH_SYS/init
+
+# vim:ft=sh
+
